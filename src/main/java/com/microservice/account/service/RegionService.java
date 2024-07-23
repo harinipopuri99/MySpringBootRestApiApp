@@ -1,5 +1,6 @@
 package com.microservice.account.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class RegionService {
 				throw new ResourceNotFoundException("Invalid Employee Id Given");
 			}
 		return regionRepository.findById(regionId).get();
+	}
+
+	public List<Region> getAllRegions() {
+		
+		return regionRepository.findAll();
 	}
 
 }

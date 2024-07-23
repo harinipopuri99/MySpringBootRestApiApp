@@ -1,6 +1,10 @@
 package com.microservice.account.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +16,7 @@ import com.microservice.account.service.CountryService;
 import com.microservice.account.service.RegionService;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class RegionController {
 
 	@Autowired
@@ -31,6 +36,11 @@ public class RegionController {
 		
 		/* save region to DB */
 		return regionService.saveRegion(region);
+	}
+	
+	@GetMapping("/api/region/all")
+	public List<Region> getAllRegions() {
+		return regionService.getAllRegions();
 	}
 }
 
