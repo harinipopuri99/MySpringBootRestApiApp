@@ -23,7 +23,7 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 	
-	@PostMapping("/api/cap/project/add/{regionId}")
+	@PostMapping("/api/project/add/{regionId}")
 	public ResponseEntity<?> postProject(@PathVariable("regionId") int regionId,  
 			@RequestBody Project project) {
 		
