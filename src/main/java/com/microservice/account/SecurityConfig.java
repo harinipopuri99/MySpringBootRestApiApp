@@ -40,7 +40,11 @@ public class SecurityConfig {
 						.antMatchers(HttpMethod.POST, "/api/employee/add/{managerId}").hasAuthority("HR")
 						.antMatchers(HttpMethod.POST,"/api/region/add/{countryId}").permitAll()
 		            	.antMatchers(HttpMethod.GET,"/api/region/all").permitAll()
-		            	
+		            	.antMatchers(HttpMethod.GET,"/api/hr/stat").hasAuthority("HR")
+		            	.antMatchers(HttpMethod.GET,"/api/hr/manager/employee").hasAuthority("HR")
+		            	.antMatchers(HttpMethod.GET,"/api/jobtype").hasAuthority("HR")
+		            	.antMatchers(HttpMethod.GET,"/api/manager/all").hasAuthority("HR")
+		            	.antMatchers(HttpMethod.GET,"/api/search/employee/manager/{searchStr}").permitAll()
 						.anyRequest().permitAll())
 				.httpBasic(Customizer.withDefaults());
 		return http.build(); /* */

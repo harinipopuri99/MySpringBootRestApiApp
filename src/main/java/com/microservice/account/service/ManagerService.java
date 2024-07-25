@@ -1,5 +1,6 @@
 package com.microservice.account.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,15 @@ public class ManagerService {
 		if(optional.isEmpty())
 			throw new ResourceNotFoundException("Manager Id Invalid");
 		return optional.get();
+	}
+
+	public List<Manager> getAll() {
+		return managerRepository.findAll();
+	}
+	
+
+	public List<Manager> searchManagerOnName(String searchStr) {
+
+		return managerRepository.searchManagerOnName(searchStr);
 	}
 }
