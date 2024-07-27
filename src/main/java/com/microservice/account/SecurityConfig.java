@@ -30,7 +30,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(authorize -> authorize
 						.antMatchers(HttpMethod.GET, "/api/login").authenticated()
 						.antMatchers(HttpMethod.POST,"/api/customer/add/{regionId}").permitAll()
-						.antMatchers(HttpMethod.GET, "/api/employee/getall").permitAll()
+						.antMatchers(HttpMethod.GET,"/api/employee/getall").hasAnyAuthority("HR","MANAGER")
 						.antMatchers(HttpMethod.POST, "/api/employee/add").hasAuthority("EMPLOYEE")
 						.antMatchers(HttpMethod.POST, "/api/country/add").authenticated()
 						.antMatchers(HttpMethod.POST, "/api/project/add/{regionId}").authenticated()
@@ -45,6 +45,10 @@ public class SecurityConfig {
 		            	.antMatchers(HttpMethod.GET,"/api/jobtype").hasAuthority("HR")
 		            	.antMatchers(HttpMethod.GET,"/api/manager/all").hasAuthority("HR")
 		            	.antMatchers(HttpMethod.GET,"/api/search/employee/manager/{searchStr}").permitAll()
+		            	.antMatchers(HttpMethod.GET,"/api/manager/employee").hasAuthority("MANAGER")
+		            	.antMatchers(HttpMethod.POST,"/api/task/employee/{eid}").hasAuthority("MANAGER")
+		            	.antMatchers(HttpMethod.GET,"/api/task/{eid}").hasAnyAuthority("MANAGER","EMPLOYEE")
+		            	.antMatchers(HttpMethod.GET,"/api/task/archive/{tid}").hasAuthority("MANAGER")
 						.anyRequest().permitAll())
 				.httpBasic(Customizer.withDefaults());
 		return http.build(); /* */

@@ -1,5 +1,6 @@
 package com.microservice.account.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microservice.account.enums.JobTitle;
 import com.microservice.account.enums.RoleType;
+import com.microservice.account.model.Employee;
 import com.microservice.account.model.Manager;
 import com.microservice.account.model.UserInfo;
 import com.microservice.account.service.ManagerService;
@@ -48,4 +50,12 @@ public class ManagerController {
 	public List<Manager> getAll(){
 		return managerService.getAll();
 	}
+	
+	@GetMapping("/api/manager/employee")
+	public List<?> getEmployeeByManager(Principal principal) {
+		String username = principal.getName();
+		List<Employee> list = managerService.getEmployeeByManager(username);
+		return list; 
+	}
+	
 }
